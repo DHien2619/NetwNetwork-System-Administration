@@ -1,0 +1,1655 @@
+\documentclass[13pt]{article}
+\usepackage[utf8]{vietnam}
+\usepackage[paperheight=29.7cm,paperwidth=21cm,right=2cm,left=3cm,top=2cm,bottom=2.5cm]{geometry}
+\usepackage{indentfirst} % Thư viện thụt đầu dòng
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{natbib}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{color}
+\usepackage{titlesec} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{indentfirst}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage{xcolor}
+%\titlespacing*{\subsection}{0pt}{6pt}{0pt} % Heading 2
+\titleformat*{\subsection}{\fontsize{14pt}{0pt}\selectfont \bfseries}
+\titleformat*{\subsubsection}{\fontsize{13pt}{0pt}\selectfont \bfseries \itshape}
+\hypersetup{ 
+    colorlinks=true,
+    linkcolor=black,
+    linkbordercolor=white  % Xóa khung đỏ
+}
+\renewcommand{\baselinestretch}{1.25} % Giãn dòng 1.5
+\setlength{\parskip}{0.3pt} % Spacing after
+\setlength{\parindent}{0.5cm} % Set khoảng cách thụt đầu dòng mỗi đoạn
+\title{empty}
+%\author{Lê Đình Khánh}
+\renewcommand\thesection{\arabic{section}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\textbf{Final Report}}
+\chead{}
+\rhead{\textbf{\textit{Quản trị hệ thống mạng}}}
+\lfoot{\textbf{Lê Đình Khánh - Lê Đức Hiền}}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\allowdisplaybreaks
+\begin{document}
+	\pagenumbering{gobble}
+	\fontsize{14pt}{20pt}\selectfont
+	\begin{center}
+		BỘ GIÁO DỤC VÀ ĐÀO TẠO\\\textbf{TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG}\\
+		---------------------
+	\end{center}
+	%\maketitle
+	\vspace{1cm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.3\linewidth]{imglap/Logo.png}
+	\end{figure}
+	% \vspace{-1cm}
+	\begin{center}
+		\textbf{BÁO CÁO CUỐI KÌ QUẢN TRỊ HỆ THỐNG MẠNG}
+	\end{center}
+	\vspace{1cm}
+	\fontsize{20pt}{20pt}\selectfont
+	\begin{center}
+		\textbf{TRIỂN KHAI, QUẢN LÝ, CẤU HÌNH BẢO MẬT VÀ THEO DÕI SỰ VI PHẠM (GUI)}
+	\end{center}
+	% \vspace{1cm}
+	% \fontsize{16pt}{20pt}\selectfont
+	% \begin{center}\Huge
+	% 	\textbf{Ngành: Mạng máy tính \\và truyền thông dữ liệu}	
+	% \end{center}
+	\vspace{6cm}
+        \fontsize{14pt}{17pt}\selectfont
+        \begin{flushright}
+            \textbf{
+                Người hướng dẫn: GV. LÊ VIẾT THANH\\
+                Người thực hiện: LÊ ĐÌNH KHÁNH – 52200250\\
+                LÊ ĐỨC HIỀN – 52200251\\
+                Lớp: Nhóm 02\\
+                Khóa: 26
+            }
+        \end{flushright}
+	\vspace{1cm}
+	\fontsize{16pt}{20pt}\selectfont
+	\begin{center}
+		\textbf{HỒ CHÍ MINH – 2024}
+	\end{center}
+
+        \newpage
+        \section*{\centering \fontsize{20pt}{24pt}\selectfont LỜI CẢM ƠN}
+        Trước tiên, chúng em xin gửi lời cảm ơn chân thành đến thầy Lê Viết Thanh đã luôn tận tình chỉ bảo, hướng dẫn và giúp đỡ chúng em trong suốt quá trình thực hiện đề tài báo cáo. Sự giúp đỡ và những chỉ dẫn quý báu của thầy đã giúp chúng em hoàn thành bài báo cáo này một cách tốt nhất.
+
+        Chúng em cũng xin cảm ơn Trường đại học Tôn Đức Thắng đã tạo điều kiện cho chúng em có cơ hội tiếp cận và tìm hiểu sâu hơn. Đây là cơ hội quý giá giúp chúng em phát triển kiến thức và kỹ năng trong quá trình học tập và nghiên cứu.
+        
+        Chúng em hy vọng rằng những kiến thức và kinh nghiệm thu được từ quá trình thực hiện đề tài sẽ là nền tảng hữu ích cho những nghiên cứu và công việc sau này.
+
+        \newpage
+        \section*{\centering \fontsize{20pt}{24pt}\selectfont ĐỒ ÁN ĐƯỢC HOÀN THÀNH TẠI TRƯỜNG ĐẠI HỌC TÔN ĐỨC THẮNG}
+        
+        Tôi xin cam đoan đây là sản phẩm đồ án của riêng chúng tôi và được sự hướng dẫn của Thầy Lê Viết Thanh. Các nội dung nghiên cứu, kết quả trong đề tài này là trung thực và chưa công bố dưới bất kỳ hình thức nào trước đây. Những số liệu trong các bảng biểu phục vụ cho việc phân tích, nhận xét, đánh giá được chính tác giả thu thập từ các nguồn khác nhau có ghi rõ trong phần tài liệu tham khảo.
+        
+        Ngoài ra, trong đồ án còn sử dụng một số nhận xét, đánh giá cũng như số liệu của các tác giả khác, cơ quan tổ chức khác đều có trích dẫn và chú thích nguồn gốc.
+        
+        \textbf{Nếu phát hiện có bất kỳ sự gian lận nào tôi xin hoàn toàn chịu trách nhiệm về nội dung đồ án của mình.} Trường đại học Tôn Đức Thắng không liên quan đến những vi phạm tác quyền, bản quyền do tôi gây ra trong quá trình thực hiện (nếu có).
+        
+        \begin{flushright}
+        TP. Hồ Chí Minh, ngày 08 tháng 12 năm 2024\\
+        \end{flushright}
+        \hspace*{10cm}Tác giả\\
+        \hspace*{8cm}(ký tên và ghi rõ họ tên)\\
+        \hspace*{9.5cm}Lê Đức Hiền\\
+        \hspace*{9.3cm}Lê Đình Khánh
+
+        \newpage
+        \section*{\centering \fontsize{16}{20}\selectfont TÓM TẮT}
+        Báo cáo tập trung vào việc triển khai, quản lý và bảo mật hệ thống mạng thông qua Windows Server, chia thành ba chương chính:
+
+        \textbf{Chương 1: Cơ sở lý thuyết}
+        
+        Cung cấp nền tảng lý thuyết về các công cụ và kỹ thuật quản trị mạng, gồm:
+
+    
+        \textbf{Chương 2: Thiết lập máy chủ và máy trạm}
+        
+        Hướng dẫn cấu hình máy chủ Windows Server (Server-DC-01) làm Domain Controller, quản lý tài nguyên và người dùng trong mạng. Đồng thời, cấu hình các máy trạm (Client1, Client2) để kết nối và tương tác với máy chủ.
+        
+        \textbf{Chương 3: Cấu hình theo kịch bản}
+        
+        Triển khai các kịch bản thực tế nhằm tăng cường quản lý và bảo mật mạng:
+        
+        \begin{itemize}
+            \item Quy tắc đặt mật khẩu, giám sát đăng nhập.
+            \item Giám sát truy cập tệp, thư mục quan trọng và thay đổi tài khoản trong Active Directory.
+            \item Cấu hình tường lửa bảo vệ hệ thống và phòng chống các cuộc tấn công DDoS.
+        \end{itemize}
+        Báo cáo mang tính ứng dụng cao, kết hợp lý thuyết và thực hành, giúp xây dựng hệ thống mạng bảo mật, ổn định và dễ quản lý.
+
+ 
+
+
+
+        
+	\newpage
+        \section*{\centering \fontsize{16p}{20}\selectfont MỤC LỤC}
+        \renewcommand{\contentsname}{} % Xóa tiêu đề
+	\tableofcontents
+	\newpage
+        \section*{\centering \fontsize{16}{20}\selectfont DANH SÁCH HÌNH ẢNH}
+        \renewcommand{\listfigurename}{} % Xóa tiêu đề "Danh sách hình ảnh"
+        \listoffigures
+	\newpage
+        \section*{\centering \fontsize{16}{20}\selectfont DANH SÁCH CHỮ VIẾT TẮT}
+        \section*{Danh sách các chữ viết tắt}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.5} % Tăng khoảng cách dòng trong bảng
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+\textbf{Viết tắt} & \textbf{Ý nghĩa đầy đủ} & \textbf{Mô tả} \\ \hline
+AD               & Active Directory                                 & Dịch vụ thư mục quản lý tài nguyên mạng. \\ \hline
+DNS              & Domain Name System                               & Hệ thống phân giải tên miền thành địa chỉ IP. \\ \hline
+GPO              & Group Policy Object                              & Tập hợp các chính sách quản lý tập trung. \\ \hline
+IIS              & Internet Information Services                    & Máy chủ web của Microsoft. \\ \hline
+IP               & Internet Protocol                                & Giao thức Internet để địa chỉ hóa thiết bị mạng. \\ \hline
+DDoS             & Distributed Denial of Service                    & Tấn công từ chối dịch vụ phân tán. \\ \hline
+OU               & Organizational Unit                              & Đơn vị tổ chức trong Active Directory. \\ \hline
+SIEM             & Security Information and Event Management        & Hệ thống quản lý bảo mật và sự kiện. \\ \hline
+TCP              & Transmission Control Protocol                    & Giao thức truyền dữ liệu tin cậy. \\ \hline
+UDP              & User Datagram Protocol                           & Giao thức truyền dữ liệu không tin cậy. \\ \hline
+ISO              & International Organization for Standardization   & Tổ chức tiêu chuẩn hóa quốc tế. \\ \hline
+HIPAA            & Health Insurance Portability and Accountability Act & Đạo luật về bảo mật thông tin y tế. \\ \hline
+GDPR             & General Data Protection Regulation               & Quy định bảo vệ dữ liệu chung của EU. \\ \hline
+IDS              & Intrusion Detection System                       & Hệ thống phát hiện xâm nhập. \\ \hline
+IPS              & Intrusion Prevention System                      & Hệ thống ngăn chặn xâm nhập. \\ \hline
+\end{tabularx}
+\caption{Danh sách các chữ viết tắt và ý nghĩa}
+\end{table}
+        
+	\newpage
+	\tableofcontents
+	\newpage
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	\section{CHƯƠNG 1: CƠ SƠ LÝ THUYẾT }
+            \subsection{Group Policy Object (GPO)}
+                \subsubsection{Định Nghĩa và Khái Niệm GPO}
+                \begin{itemize}
+                \item Group Policy Object (GPO): Là tập hợp các quy tắc (policies) được quản lý tập trung, áp dụng cho tài khoản người dùng và máy tính trong một môi trường domain (Active Directory).
+
+                \item Mục tiêu: Đảm bảo quản lý hiệu quả, tăng cường bảo mật và thiết lập môi trường làm việc nhất quán.
+                \end{itemize}
+
+                \subsubsection{Cấu Trúc và Thành Phần của GPO}
+                \begin{itemize}
+                \item Cấu trúc GPO
+                    \begin{itemize}
+                        \item Computer Configuration: Các chính sách áp dụng khi máy tính khởi động. Dùng để quản lý cài đặt hệ điều hành, dịch vụ hệ thống, bảo mật mạng.
+
+                        \item User Configuration: Các chính sách áp dụng khi người dùng đăng nhập. Dùng để quản lý môi trường làm việc, phần mềm, và quyền truy cập.
+                        
+                    \end{itemize}
+
+                \item Thành phần của GPO
+                    \begin{itemize}
+                        \item Core Policies: Administrative Templates gồm các mẫu chính sách định sẵn. Security Settings gồm các cài đặt bảo mật như tường lửa, quyền truy cập, mã hóa.
+
+                        \item Preferences: Cho phép tùy chỉnh linh hoạt hơn, như ánh xạ ổ đĩa, cài đặt máy in.
+
+                        \item Scripts: Hỗ trợ chạy các tập lệnh (Startup, Shutdown, Logon, Logoff).
+
+                        \item Folder Redirection: Chuyển hướng các thư mục hệ thống của người dùng (Documents, Desktop).
+                        
+                    \end{itemize}
+                \end{itemize}
+
+                \subsubsection{Quy Trình Hoạt Động của GPO}
+                \begin{itemize}
+                \item Bước 1: Tạo GPO: Quản trị viên tạo GPO trong Group Policy Management Console (GPMC).
+
+                \item Bước 2: Liên kết GPO (Link): GPO được liên kết với các đối tượng trong Active Directory
+                    \begin{itemize}
+                        \item Sites: Áp dụng cho các site mạng.
+
+                        \item Domains: Áp dụng cho toàn bộ domain.
+
+                        \item Organizational Units (OUs): Áp dụng cho các nhóm máy tính hoặc người dùng trong OU.
+                        
+                    \end{itemize}
+
+                \item Bước 3: Thứ tự Ưu tiên (Order of Precedence):
+                    \begin{itemize}
+                        \item Chính sách sẽ được áp dụng theo thứ tự: Local Policies → Site → Domain → OU
+
+                        \item Nếu có xung đột, chính sách ở mức OU có ưu tiên cao hơn.
+                        
+                    \end{itemize}
+
+                \item Bước 4: Cập nhật GPO: Các chính sách được thực thi khi:
+                    \begin{itemize}
+                        \item Máy tính khởi động hoặc người dùng đăng nhập.
+
+                        \item Dùng lệnh: gpupdate /force để áp dụng ngay lập tức.
+                        
+                    \end{itemize}
+                \end{itemize}
+
+                \subsubsection{Vai Trò của GPO trong Quản Trị Mạng}
+                \begin{itemize}
+                \item Quản lý môi trường hệ thống: Cấu hình tự động các máy tính và tài khoản người dùng, giảm thiểu công việc thủ công.
+
+                \item Cải thiện bảo mật:
+                    \begin{itemize}
+                        \item Chính sách bảo mật người dùng: Bắt buộc sử dụng mật khẩu phức tạp. Đặt giới hạn số lần đăng nhập sai (Account Lockout Policy).
+
+                        \item Chính sách bảo mật máy tính: Tắt cổng USB hoặc CD/DVD. Tăng cường bảo vệ mạng thông qua Windows Firewall Rules.
+                    \end{itemize}
+
+                \item Quản lý phần mềm: Triển khai và cập nhật phần mềm tự động. Gỡ bỏ hoặc hạn chế phần mềm không được phép sử dụng.
+
+                \item Kiểm soát tài nguyên: Áp dụng chính sách hạn chế quyền truy cập file, folder. Chuyển hướng thư mục hệ thống để lưu trữ tập trung.
+                \end{itemize}
+
+                \subsubsection{Ưu và Nhược Điểm của GPO}
+                \begin{itemize}
+                    \item Ưu điểm
+                    \begin{itemize}
+                        \item Tập trung hóa quản lý: Quản trị viên dễ dàng cấu hình cho toàn hệ thống từ một nơi.
+                        \item Tính nhất quán: Tạo môi trường làm việc đồng nhất cho người dùng.
+                        \item Tăng cường bảo mật: Dễ dàng áp dụng các chính sách bảo mật.
+                        
+                    \end{itemize}
+    
+                    \item Nhược điểm
+                    \begin{itemize}
+                        \item Phức tạp: Khi hệ thống lớn, việc quản lý nhiều GPO có thể gây khó khăn.
+                        \item Khả năng xung đột: Các GPO không được cấu hình đúng thứ tự có thể gây lỗi.
+                        \item Phụ thuộc Windows Server: GPO chỉ hoạt động tốt trong môi trường Windows.
+                        
+                    \end{itemize}
+                    \end{itemize}
+                
+            \subsection{Audit}
+                \subsubsection{Định Nghĩa Audit}
+                \begin{itemize}
+                \item Audit là quá trình theo dõi và ghi lại các sự kiện trong hệ thống mạng hoặc máy tính nhằm tăng cường bảo mật, hỗ trợ quản trị, và đáp ứng các yêu cầu tuân thủ pháp lý. Audit thường được triển khai trong môi trường doanh nghiệp để giám sát hành vi của người dùng và trạng thái hệ thống.
+                \end{itemize}
+
+                \subsubsection{Ý Nghĩa và Vai Trò Của Audit}
+                \begin{itemize}
+                \item Giám sát hoạt động: Theo dõi các hành vi đăng nhập, truy cập tài nguyên, và thay đổi trên hệ thống.
+
+                \item Bảo vệ hệ thống: Phát hiện các hành vi đáng ngờ hoặc vi phạm, như truy cập trái phép hoặc tấn công mạng.
+                
+                \item Hỗ trợ điều tra: Cung cấp dữ liệu lịch sử để phân tích sự cố hoặc xử lý khi xảy ra vấn đề.
+                
+                \item Đáp ứng tuân thủ: Đáp ứng yêu cầu của các tiêu chuẩn bảo mật như ISO 27001, HIPAA, và GDPR.
+                
+                \end{itemize}
+
+                \subsubsection{Các Thành Phần Chính Trong Audit}
+                \begin{itemize}
+                \item Audit Policy (Chính sách kiểm tra): Định nghĩa những gì cần theo dõi, ví dụ:
+                    \begin{itemize}
+                        \item Đăng nhập/đăng xuất (Logon/Logoff).
+                        \item Quản lý tài khoản (Account Management).
+                        \item Truy cập tài nguyên (Object Access).
+                        \item Thay đổi chính sách (Policy Change).
+                    \end{itemize}
+
+                \item Log Audit: Dữ liệu được ghi lại trong hệ thống log, phổ biến nhất là Event Viewer trên Windows.
+                
+                \item Advanced Audit Policy Configuration: Cấu hình chi tiết hơn so với Audit Policy cơ bản, tập trung vào từng hành động cụ thể.
+            
+                
+                \end{itemize}
+
+                \subsubsection{Triển Khai Audit Trên Windows Server}
+                \begin{itemize}
+                    \item Bật Audit Policy
+                    \begin{itemize}
+                        \item Truy cập Group Policy Management Console (GPMC) hoặc Local Security Policy.
+                        \item Bật các chính sách trong:
+Computer Configuration → Windows Settings → Security Settings → Audit Policy.
+                        
+                    \end{itemize} 
+    
+                    \item Xem Log Audit
+                    \begin{itemize}
+                        \item Mở Event Viewer: Event Viewer → Security Logs.
+                        \item Phân tích các sự kiện dựa trên Event ID, thời gian, và tài khoản liên quan.
+                    \end{itemize}
+
+                    \item Tự động hóa theo dõi: Sử dụng các công cụ như SIEM (Splunk, QRadar) để tổng hợp và phân tích log một cách hiệu quả.
+                    
+                    \end{itemize}
+
+                \subsubsection{Ưu và Nhược Điểm của GPO}
+                \begin{itemize}
+                    \item Ưu điểm
+                    \begin{itemize}
+                        \item Theo dõi và phát hiện sự cố nhanh chóng.
+                        \item Cung cấp thông tin chi tiết cho điều tra và phân tích.
+                        \item Đáp ứng các yêu cầu pháp lý về bảo mật.
+                        
+                    \end{itemize}
+    
+                    \item Nhược điểm
+                    \begin{itemize}
+                        \item Tốn tài nguyên lưu trữ log.
+                        \item Khó quản lý khi có quá nhiều dữ liệu cần phân tích.
+                        \item Phụ thuộc vào cấu hình chính xác để đạt hiệu quả cao.
+                        
+                    \end{itemize}
+                    \end{itemize}
+                    
+            \subsection{Firewall}
+                \subsubsection{Định Nghĩa và Khái Niệm Firewall }
+                \begin{itemize}
+                \item Firewall là công cụ bảo mật tích hợp trong hệ điều hành Windows Server, giúp quản lý và kiểm soát luồng dữ liệu vào/ra hệ thống mạng. Nó hoạt động như một tường lửa để bảo vệ máy chủ khỏi các truy cập trái phép và mối đe dọa từ bên ngoài.
+                \end{itemize}
+
+                \subsubsection{Chức Năng Của Firewall}
+                \begin{itemize}
+                \item Lọc lưu lượng mạng: Kiểm soát kết nối dựa trên quy tắc cho phép hoặc từ chối các gói dữ liệu.
+                \item Bảo vệ máy chủ: Ngăn chặn các cuộc tấn công từ bên ngoài, như DDoS, brute force.
+                \item Quản lý linh hoạt: Cung cấp tùy chọn bật/tắt tường lửa hoặc cấu hình chi tiết từng dịch vụ.
+                \item Tích hợp với Group Policy: Quản lý chính sách tường lửa tập trung trên các máy trạm trong hệ thống.
+                
+                \end{itemize}
+
+                \subsubsection{Kiến Trúc Firewall}
+                \begin{itemize}
+                \item Firewall Rules (Quy tắc tường lửa)
+                    \begin{itemize}
+                        \item Các quy tắc xác định cách xử lý gói dữ liệu vào hoặc ra.
+                        \item Gồm ba loại: Inbound Rules dùng kiểm soát lưu lượng vào. Outbound Rules dùng kiểm soát lưu lượng ra. Connection Security Rules dùng xác định kết nối bảo mật giữa các máy chủ.
+                    \end{itemize}
+                
+                \item Profile Types: Firewall hoạt động dựa trên các profile để áp dụng quy tắc phù hợp với môi trường mạng.
+                    \begin{itemize}
+                        \item Domain Profile: Dành cho các kết nối thuộc domain.
+                        \item Private Profile: Dành cho mạng nội bộ tin cậy.
+                        \item Public Profile: Dành cho mạng không tin cậy (như Wi-Fi công cộng).
+                    \end{itemize}
+                
+                \end{itemize}
+
+                \subsubsection{Ưu và Nhược Điểm của Firewall}
+                \begin{itemize}
+                    \item Ưu điểm
+                    \begin{itemize}
+                        \item Tích hợp sẵn trong hệ điều hành, dễ sử dụng.
+                        \item Quản lý chi tiết các quy tắc.
+                        \item Hỗ trợ bảo mật toàn diện với các profile khác nhau.
+                        \item Tương thích với Group Policy để quản lý tập trung.
+                        
+                    \end{itemize}
+    
+                    \item Nhược điểm
+                    \begin{itemize}
+                        \item Khả năng bảo mật hạn chế so với tường lửa phần cứng.
+                        \item Phụ thuộc vào cấu hình chính xác.
+                        \item Có thể gây gián đoạn nếu cấu hình sai
+                        
+                    \end{itemize}
+                    \end{itemize}
+
+            \subsection{Distributed Denial of Service (DDoS)}
+                \subsubsection{Định Nghĩa và Khái Niệm DDoS  }
+                \begin{itemize}
+                \item DDoS (Distributed Denial of Service) là một dạng tấn công mạng phổ biến, trong đó kẻ tấn công sử dụng nhiều máy tính hoặc thiết bị bị kiểm soát để làm quá tải tài nguyên của một máy chủ, dịch vụ, hoặc mạng, dẫn đến tình trạng không thể phục vụ người dùng hợp pháp. Đây là một trong những mối đe dọa an ninh mạng lớn đối với hệ thống thông tin.
+                \end{itemize}
+
+                \subsubsection{Cơ chế hoạt động và hậu quả DDoS  }
+                \begin{itemize}
+                \item Cơ Chế Hoạt Động
+                    \begin{itemize}
+                        \item Kẻ tấn công phát tán phần mềm độc hại để chiếm quyền điều khiển các thiết bị (botnet).
+                        \item Các thiết bị trong botnet gửi một lượng lớn yêu cầu đến mục tiêu (máy chủ hoặc dịch vụ).
+                        \item Mục tiêu bị quá tải tài nguyên (CPU, băng thông) và không thể xử lý yêu cầu hợp pháp.
+                    \end{itemize}
+
+                \item Hậu Quả
+                    \begin{itemize}
+                        \item Gián đoạn dịch vụ: Website, ứng dụng, hoặc máy chủ ngừng hoạt động.
+                        \item Thiệt hại tài chính: Do mất khách hàng, gián đoạn kinh doanh, và chi phí khôi phục.
+                        \item Ảnh hưởng uy tín: Làm giảm lòng tin của khách hàng và đối tác.
+                        \item Chiếm dụng tài nguyên: Hệ thống bị tấn công tiêu tốn tài nguyên vào việc xử lý lưu lượng không hợp pháp.
+                        
+                    \end{itemize}
+                
+                \end{itemize}
+
+                \subsubsection{Các dạng tấn công DDoS  }
+                \begin{itemize}
+                \item Tấn Công Băng Thông (Volumetric Attacks):
+                    \begin{itemize}
+                        \item Mục tiêu: Tiêu tốn toàn bộ băng thông của mục tiêu.
+                        \item Phương thức: Gửi một lượng lớn lưu lượng đến mạng mục tiêu.
+                        \item Ví dụ: UDP Flood, ICMP Flood (Ping Flood).
+                    \end{itemize}
+
+                \item Tấn Công Giao Thức (Protocol Attacks):
+                    \begin{itemize}
+                        \item Mục tiêu: Lạm dụng giao thức mạng để làm cạn kiệt tài nguyên của máy chủ.
+                        \item Phương thức: Tấn công vào tầng giao thức như TCP, UDP, hoặc ICMP.
+                    \end{itemize}
+
+                \item Tấn Công Ứng Dụng (Application Layer Attacks):
+                    \begin{itemize}
+                        \item Mục tiêu: Làm cạn kiệt tài nguyên của ứng dụng hoặc dịch vụ cụ thể.
+                        \item Phương thức: Gửi yêu cầu phức tạp đến ứng dụng như HTTP GET/POST.
+                        \item Ví dụ: HTTP Flood, Slowloris.
+                    \end{itemize}
+                
+                \end{itemize}
+            
+                \subsubsection{Cách Phòng Chống DDoS }
+                \begin{itemize}
+                \item Tăng Cường Hạ Tầng
+                    \begin{itemize}
+                        \item Tăng băng thông: Mở rộng băng thông mạng để giảm nguy cơ quá tải.
+                        \item Load Balancer: Phân phối lưu lượng giữa các máy chủ để tránh tập trung tại một điểm.
+                    \end{itemize}
+
+                \item Sử Dụng Công Cụ Chuyên Dụng
+                    \begin{itemize}
+                        \item Firewall và IPS/IDS: Phát hiện và chặn các luồng dữ liệu bất thường.
+                        \item DDoS Mitigation Services: Dịch vụ như Cloudflare, Akamai, hoặc AWS Shield giúp lọc lưu lượng tấn công.
+                    \end{itemize}
+
+                \item Triển Khai Chính Sách Bảo Mật
+                    \begin{itemize}
+                        \item Rate Limiting: Giới hạn số lượng yêu cầu từ một nguồn cụ thể.
+                        \item Access Control: Chặn lưu lượng từ các IP đáng ngờ hoặc khu vực địa lý cụ thể.
+                        \item Tăng cường DNS Security: Bảo vệ DNS để tránh bị tấn công DNS Amplification.
+                    \end{itemize}
+
+                \item Giám Sát Và Phát Hiện Sớm
+                    \begin{itemize}
+                        \item Giám sát mạng: Sử dụng các công cụ như Nagios, SolarWinds, hoặc Zabbix để theo dõi lưu lượng.
+                        \item Hệ thống cảnh báo: Đặt ngưỡng lưu lượng bất thường để cảnh báo.
+                    \end{itemize}
+                
+                \end{itemize}
+
+                \subsubsection{Ưu và Nhược Điểm của Firewall}
+                \begin{itemize}
+                    \item Ưu điểm
+                    \begin{itemize}
+                        \item Tăng cường bảo mật và khả năng chịu tải của hệ thống.
+                        \item Ngăn chặn các cuộc tấn công nhỏ trước khi chúng gây hậu quả nghiêm trọng.
+                        \item Bảo vệ tài nguyên và giảm chi phí khôi phục sau sự cố.
+                    \end{itemize}
+    
+                    \item Nhược điểm
+                    \begin{itemize}
+                        \item Chi phí cao khi triển khai các biện pháp nâng cao.
+                        \item Cần sự quản trị chuyên sâu và liên tục để phát hiện và ứng phó hiệu quả.
+                        \item Một số cuộc tấn công phức tạp vẫn có thể vượt qua các biện pháp bảo vệ.
+                        
+                    \end{itemize}
+                    \end{itemize}
+
+                
+	\section{CHƯƠNG 2: THIẾT LẬP MÁY }
+            \subsection{Máy Server-DC-01}
+                \begin{itemize}
+                    \item Thiết lập địa chỉ IP
+                        \begin{itemize}
+                            \item Vào Control Panel > Network and Internet > Network and Sharing Center > Change adapter settings > Ethernet0 > Properties > Internet Protocol Version 4 (TCP/IPv4)
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img1.png}
+                                \caption{Vào Conntrol Panel}
+                                \label{fig:enter-labe}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img2.png}
+                                \caption{Vào Network and Internet}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img3.png}
+                                \caption{Vào Network and Sharing Center}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img4.png}
+                                \caption{Vào Change adapter settings}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \begin{minipage}{0.45\linewidth}
+                                    \centering
+                                    \includegraphics[width=\linewidth]{imglap/gui_img/chương 2/img5.png}
+                                    \caption{Vào Ethernet0}
+                                    \label{fig:enter-label1}
+                                \end{minipage}
+                                \hfill
+                                \begin{minipage}{0.45\linewidth}
+                                    \centering
+                                    \includegraphics[width=\linewidth]{imglap/gui_img/chương 2/img6.png}
+                                    \caption{Vào Properties}
+                                    \label{fig:enter-label2}
+                                \end{minipage}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img7.png}
+                                \caption{Vào Internet Protocol Version 4}
+                                \label{fig:enter-label}
+                            \end{figure}
+                        \end{itemize}
+                \end{itemize}
+                \newpage
+                \begin{itemize}
+                    \item Nâng cấp máy lên Domain Controler
+                        \begin{itemize}
+                            \item Vào Server Manager > Manager > Add roles and features
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img8.png}
+                                \caption{Vào Server Manager}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img9.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img10.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \item Chọn Role-based or feature-based installation
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img11.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+                            \newpage
+                            \item Trong danh sách Roles, chọn Active Directory Domain Services.
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img12.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img13.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img15.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}{H}
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img14.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img17.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img16.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img20.png}
+                                \caption{Tải ADDS}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img18.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+                            \newpage
+                            \item Chọn Add a new forest để tạo domain mới
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img19.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \item Điền mật khẩu là P@ssw0rd
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img21.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img22.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img23.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img24.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img25.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img26.png}
+                                \caption{Tạo domain}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img27.png}
+                                \caption{Restart máy}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img28.png}
+                                \caption{Kiểm tra máy}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=1\linewidth]{imglap/gui_img/chương 2/img29.png}
+                                \caption{Kiểm tra máy}
+                                \label{fig:enter-label}
+                            \end{figure}
+                            
+                        \end{itemize}
+                \end{itemize}
+                
+            
+            \subsection{Máy Client1}
+                 \begin{itemize}
+                    \item Thiết lập địa chỉ IP
+                        \begin{itemize}
+                        \item Vào Control Panel > Network and Internet > Network and Sharing Center > Change adapter settings > Ethernet0 > Properties > Internet Protocol Version 4 (TCP/IPv4)
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img1.png}
+                            \caption{Vào Control Panel}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img2.png}
+                            \caption{Vào Network và Internet}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img3.png}
+                            \caption{Vào Network and Sharing Center}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img4.png}
+                            \caption{Vào Change adapter settings}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \begin{figure}[H]
+                            \centering
+                            \begin{minipage}{0.45\linewidth}
+                                \centering
+                                \includegraphics[width=\linewidth]{imglap//gui_img//chương 2//Client1/img5.png}
+                                \caption{Thiết lập IP}
+                                \label{fig:enter-label1}
+                            \end{minipage}
+                            \hfill
+                            \begin{minipage}{0.45\linewidth}
+                                \centering
+                                \includegraphics[width=\linewidth]{imglap//gui_img//chương 2//Client1/img6.png}
+                                \caption{Thiết lập IP}
+                                \label{fig:enter-label2}
+                            \end{minipage}
+                        \end{figure}
+
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=0.5\linewidth]{imglap//gui_img//chương 2//Client1/img7.png}
+                            \caption{Thiết lập IP}
+                            \label{fig:enter-label}
+                        \end{figure}
+                        \end{itemize}
+                        
+                 \end{itemize}
+\newpage
+                \begin{itemize}
+                    \item Thêm máy Client1 vào Domain
+                        \begin{itemize}
+                        \item Vào This PC > Properties
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img8.png}
+                            \caption{Thêm máy Client1 vào domain}
+                            \label{fig:enter-label}
+                        \end{figure}
+\newpage
+                        \item Chọn Change settings
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img9.png}
+                            \caption{Thêm máy Client1 vào domain}
+                            \label{fig:enter-label}
+                        \end{figure}
+\newpage
+                        \item Chọn Change
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img10.png}
+                            \caption{Thêm máy Client1 vào domain}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \item Điền Computer name là Client1 và Domain là labtdtu.com sau đó nhập tài khoản admin vào.
+                        \begin{figure}[H]
+                            \centering
+                            \begin{minipage}{0.45\linewidth}
+                                \centering
+                                \includegraphics[width=\linewidth]{imglap//gui_img//chương 2//Client1/img11.png}
+                                \caption{Thêm máy Client1 vào domain}
+                                \label{fig:enter-label1}
+                            \end{minipage}
+                            \hfill
+                            \begin{minipage}{0.45\linewidth}
+                                \centering
+                                \includegraphics[width=\linewidth]{imglap//gui_img//chương 2//Client1/img12.png}
+                                \caption{Thêm máy Client1 vào domain}
+                                \label{fig:enter-label2}
+                            \end{minipage}
+                        \end{figure}
+                        
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img13.png}
+                            \caption{Thêm máy Client1 vào domain}
+                            \label{fig:enter-label}
+                        \end{figure}
+
+                        \end{itemize}
+                \end{itemize}
+                    
+            
+            \subsection{Máy Client2}
+                \begin{itemize}
+                    \item Thiết lập địa chỉ IP
+                        \begin{itemize}
+                            \item Làm tương tự như máy Client1
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=0.5\linewidth]{imglap//gui_img//chương 2//Client1/img15.png}
+                                \caption{Máy Client2}
+                                \label{fig:enter-label}
+                            \end{figure}
+
+                        \end{itemize}
+                 \end{itemize}
+
+                 \begin{itemize}
+                    \item Thêm máy Client2 vào Domain
+                        \begin{itemize}
+                            \item Làm tương tự như máy Client1
+
+                                \begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap//gui_img//chương 2//Client1/img14.png}
+                                    \caption{Máy Client2}
+                                    \label{fig:enter-label}
+                                \end{figure}
+
+                        \end{itemize}
+                 \end{itemize}
+    \newpage
+	\section{CHƯƠNG 3: CẤU HÌNH VỚI KỊCH BẢN }
+	
+        \subsection{Kịch bản 1: Cấu hình quy tắc đặt mật khẩu và giám sát đăng nhập}
+		\begin{enumerate}
+                \item \textbf{Máy SERVER-DC-01}
+                \begin{itemize}
+                    \item Cấu hình Account Policies:
+                        \sloppy
+                        \begin{itemize}
+    \item \texttt{Mật khẩu ít nhất 8 ký tự, có số , ký tự đặc biệt, chữ hoa.}
+    \item \texttt{Thời gian khóa tài khoản sau khi nhập sai 3 lần.}
+    \item \texttt{Thời gian đổi mật khẩu định kỳ 1 tháng/lần.}
+    \item \texttt{Nhập sai mật khẩu 3 lần thì bị khóa tài khoản.}
+    \item \texttt{Mở Server Manager > Dashboard và chọn Tools > Group Policy Management.}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.1.png}
+        \caption{Server Manager > Dashboard và chọn Tools > Group Policy Management}
+        \label{fig:enter-label}
+    \end{figure}
+        
+\newpage
+        \item \texttt{Trong }\textbf{\text{Group Policy Management }}\texttt{, mở rộng Forest > Domains. Nhấn chuột phải vào Group Policy Objects rồi chọn New}
+        \item \texttt{Điền tên cho GPO mới tạo là “Kich ban 1” và nhấn OK}
+
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.2.png}
+            \caption{Tạo kịch bản 1}
+            \label{fig:enter-label}
+        \end{figure}
+\newpage
+        \item \texttt{Mở }\textbf{\text{Group Policy Objects }}\texttt{ta thấy các GPO được tạo}
+        \item \texttt{Để tùy chỉnh GPO đã tạo ta nhấn chuột phải vào GPO “Kich ban 1” rồi chọn Edit… để mở}\textbf{\text{ Group Policy Management }}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.3.png}
+            \caption{Tùy chỉnh GPO kịch bản 1}
+            \label{fig:enter-label}
+        \end{figure}
+
+        \item \texttt{Trong cửa sổ }\textbf{\text{Group Policy Management }}\texttt{Editor, điều hướng đến:}
+        \item \texttt{
+Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Password Policy.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.4.png}
+    \caption{Password Policy}
+    \label{fig:enter-label}
+\end{figure}
+
+        \item \textbf{\text{Chọn Minimum password length }}\texttt{rồi tích chọn Define this policy setting. Tại ô characters điền số 8 > Nhấn OK.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.5.png}
+    \caption{Minimum password length}
+    \label{fig:enter-label}
+\end{figure}
+
+\item \texttt{Để kích hoạt quy tắc cho mật khẩu chọn Password must meet complexity requirements rồi tích chọn Define this policy setting > Enabled}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.6.png}
+    \caption{Password complexity requirements}
+    \label{fig:enter-label}
+\end{figure}
+
+\item \texttt{Để đặt thời gian đổi mật khẩu định kỳ hàng tháng thì chọn }\textbf{\text{Maximum password age }}\texttt{rồi tích chọn Define this policy setting rồi điền vào ô days là 30.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.7.png}
+    \caption{Maximum password age}
+    \label{fig:enter-label}
+\end{figure}
+
+        \item \texttt{Trong cửa sổ Group Policy Management Editor, điều hướng đến: Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Account Lockout Policy.}
+        \item \textbf{\text{Account lockout threshold: }}\texttt{Nhấp đúp vào và đặt thành 3 (đây là số lần nhập sai mật khẩu tối đa trước khi tài khoản bị khóa).}
+        \item \textbf{\text{Account lockout duration: }}\texttt{Đặt thời gian tài khoản bị khóa (ví dụ: 30 phút). Sau khoảng thời gian này, tài khoản sẽ tự động được mở khóa.}
+        \item \textbf{\text{Reset account lockout counter after: }}\texttt{Đặt thời gian để bộ đếm số lần nhập sai sẽ được đặt lại (nên đặt tương tự với Account lockout duration, ví dụ: 30 phút).}
+        \item \texttt{chọn }\textbf{\text{Account lockout threshold }}\texttt{rồi tích chọn} \textbf{\text{Define this policy setting}}\texttt{ rồi điền vào ô invalid logon attempts là 30.}
+        
+        \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 1/kịch bản 1.8.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 1/kịch bản 1.9.png}}\hfill
+ 				\caption{Switching ip address}
+ 				\label{fig:AD_p2}
+ 		\end{figure}         
+\newpage
+        \item \texttt{Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh }\textbf{\text{gpupdate /force }}\texttt{trong Command Prompt (với quyền Admin):}
+   \begin{figure}[H]
+       \centering
+       \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.10.png}
+       \caption{gpupdate /force}
+       \label{fig:enter-label}
+   \end{figure}
+
+   \item \textbf{Cấu hình giám sát:}
+    \item \texttt{Bật tính năng Audit để theo dõi số lần nhập sai mật khẩu:
+    Trong cửa sổ Group Policy Management Editor, điều hướng đến: Computer Configuration > Policies > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Audit Policies > Logon/Logoff.}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.11.png}
+    \caption{Audit Policies > Logon/Logoff}
+    \label{fig:enter-label}
+\end{figure}
+
+        \item \texttt{Nhấp đúp vào Audit Logon và Audit Account Logon để bật.}
+        \item \textbf{\text{Audit Logon: }}\texttt{Bật tính năng audit cho cả đăng nhập thành công và thất bại.}
+        \item \textbf{\text{Audit Account Logon: }}\texttt{Bật tính năng audit cho sự kiện xác thực thông qua tài khoản domain.}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.12.png}
+            \caption{Bật tính năng audit}
+            \label{fig:enter-label}
+        \end{figure}
+
+        \item \texttt{Ra Group Policy Manager và kéo GPO kich ban 1 vào Domain Control}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.13.png}
+            \caption{Liên kết GPO kich ban 1
+vào Domain Control}
+            \label{fig:enter-label}
+        \end{figure}
+
+        \item \texttt{Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh }\textbf{\text{gpupdate /force }}\texttt{trong Command Prompt (với quyền Admin):}
+
+        \item \texttt{Xem sự kiện đăng nhập thất bại:}
+        \item \texttt{Mở Server Manager > Tools > Event Viewer.}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.14.png}
+            \caption{Event Viewer}
+            \label{fig:enter-label}
+        \end{figure}
+        \end{itemize}
+        \end{itemize}
+        \item \textbf{Demo}
+        \begin{itemize}
+            
+        \begin{itemize}
+        \item \texttt{Thử đăng nhập với máy Server bằng mật khẩu không đúng}
+        
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.15.png}
+    \caption{Đăng nhập thất bại}
+    \label{fig:enter-label}
+\end{figure}
+        \item \texttt{Mở Server Manager > Tools > Event Viewer.}
+        \item \texttt{Trong}\textbf{\text{ Event Viewer}}\texttt{, điều hướng đến: Windows Logs > Security.}
+        \item \texttt{Tìm các sự kiện có}\textbf{\text{ ID 4625: }}\texttt{Sự kiện này ghi lại mỗi lần đăng nhập thất bại (bao gồm cả nhập sai mật khẩu).}
+        \item \texttt{Bạn có thể xem thông tin chi tiết của sự kiện, bao gồm tài khoản người dùng nào đã nhập sai mật khẩu và thời gian cụ thể.}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 1/kịch bản 1.16.png}
+            \caption{Kiểm tra log}
+            \label{fig:enter-label}
+        \end{figure}
+        
+        \end{itemize}
+        \end{itemize}
+        \end{enumerate}
+\newpage        
+\subsection{Kịch bản 2: Giám sát truy cập các thư mục và tệp quan trọng}
+        \begin{enumerate}
+            \item \textbf{Thiết lập Audit Policy}
+            \begin{itemize}
+                \item Bật Audit Object Access trong Local Security Policy hoặc Group Policy.
+                \sloppy
+                \begin{itemize}
+                    \item \texttt{Tạo Folder “Kich ban 2” sau nhấn chuột phải vào Folder mới tạo chọn Properties và chọn Sharing }
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.1.png}
+                        \caption{Tạo folder}
+                        \label{fig:enter-label}
+                    \end{figure}
+                
+
+\newpage
+                \item \texttt{Nhấn Advanced Sharing rồi tích chọn Share this folder > Permissions rồi tích Full Control}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.2.png}
+                    \caption{Chọn Advanced Sharing}
+                    \label{fig:enter-label}
+                \end{figure}
+\newpage
+                \item \texttt{Nhấn chuột phải vào Folder “Kich ban 2”  chọn Properties và chọn Security chọn Advanced > 
+Auditing > Add > Select a Principal > Điền Everyone rồi nhấn Check Names > OK}
+                \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 2/kịch bản 2.3.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 2/kịch bản 2.4.png}}\hfill
+ 				\caption{Cấu hình Permission}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+
+            \item \texttt{Nhấn chuột phải vào Folder “Kich ban 2”  chọn Properties và chọn Security chọn Advanced > 
+Auditing > Add > Select a Principal > Điền Everyone rồi nhấn Check Names > OK}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.5.png}
+                \caption{Security > Advanced}
+                \label{fig:enter-label}
+            \end{figure}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.6.png}
+                    \caption{Auditing > Add}
+                    \label{fig:enter-label}
+                \end{figure}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.7.png}
+                    \caption{Add > Select a Principal}
+                    \label{fig:enter-label}
+                \end{figure}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.8.png}
+                    \caption{Điền Everyone rồi nhấn Check Names > OK}
+                    \label{fig:enter-label}
+                \end{figure}
+
+                \item \texttt{Tại Auditing Entry for Kich ban 2, chỉnh Type: All và chọn Full control}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.9.png}
+                    \caption{Cài đặt Auditing Entry}
+                    \label{fig:enter-label}
+                \end{figure}
+                
+                \item Thiết lập Auditing trên các tệp và thư mục cần giám sát \\(Properties > Security > Advanced > Auditing). 
+
+                \item \texttt{Nhấn chuột phải vào Group Policy Objects rồi chọn New để tạo GPO “Kich ban 2”}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.10.png}
+                    \caption{Tạo GPO kịch bản 2}
+                    \label{fig:enter-label}
+                \end{figure}
+    
+                \item \texttt{Computer Configuration > Policies > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Audit Policies > Object Access}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.11.png}
+                    \caption{Chọn Audit File System cho cả sự kiện Success and Failure}
+                    \label{fig:enter-label}
+                \end{figure}
+\newpage
+                \item \texttt{Ra Group Policy Manager và kéo GPO kich ban 2 vào Domain Control}
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.12.png}
+                    \caption{Liên kết kịch bản 2 vào Domain Control}
+                    \label{fig:enter-label}
+                \end{figure}
+
+                \item \texttt{Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh gpupdate /force trong Command Prompt (với quyền Admin):}
+                    \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.13.png}
+                    \caption{gpupdate /force}
+                    \label{fig:enter-label}
+                \end{figure}
+                \end{itemize}
+                
+            \end{itemize}
+            
+            \newpage
+                    \item \textbf{Demo: Kiểm tra trong Event Viewer}
+                    \begin{itemize}
+                        
+                    \begin{itemize}
+                    \item Vào máy Windows 8.1 > Network > SERVER-DC-01 > Kich ban 2
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.14.png}
+                        \caption{ Windows 8.1 > Network}
+                        \label{fig:enter-label}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.15.png}
+                        \caption{SERVER-DC-01 > Kich ban 2}
+                        \label{fig:enter-label}
+                    \end{figure}
+\newpage
+                    \item Tạo 1 file và xóa để kiểm tra thử
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.16.png}
+                        \caption{Tạo và xóa file}
+                        \label{fig:enter-label}
+                    \end{figure}
+                    \item \texttt{Mở Server Manager > Tools > Event Viewer Trong Event Viewer, điều hướng đến: Windows Logs > Security.}
+                    \item \texttt{Tìm mã sự kiện 4663 (truy cập vào tệp hoặc thư mục) và 4660 và 4659 (xóa tệp)}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.18.png}
+                        \caption{Kiểm tra Event Viewer}
+                        \label{fig:enter-label}
+                    \end{figure}
+                    \item \texttt{Tạo POPUP hiện thông báo khi xóa object Tại Event Viewer, điều hướng đến: Windows Logs > Security.}
+                    \item \texttt{Chọn log có mã 4660, và nhấn chuột phải vào và chọn Attach Task To This Event}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.17.png}
+                        \caption{Tìm log ID 4660}
+                        \label{fig:enter-label}
+                    \end{figure}
+                    \item \texttt{Tại mục Create a Basic Task > Điền name và Kich ban 2}
+                    \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 2/kịch bản 2.19.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 2/kịch bản 2.20.png}}\hfill
+ 				\caption{Điền log ID}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+\newpage
+        \item \texttt{Tại Start a Program: Điền msg vào Program và điền “ * Object vua bi xoa” vào Add agruments}
+        \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 2/kịch bản 2.21.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 2/kịch bản 2.22.png}}\hfill
+ 				\caption{Hoàn thành task}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+        \item \texttt{Kết quả}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 2/kịch bản 2.23.png}
+            \caption{Sau khi có một file bị xóa thông báo sẽ hiển thị}
+            \label{fig:enter-label}
+        \end{figure}
+                \end{itemize}
+                \end{itemize}
+        \end{enumerate}
+
+        \newpage
+        \subsection{Kịch bản 3: Giám sát việc thay đổi tài khoản trong Active Directory}
+        \begin{enumerate}
+            \item \textbf{Thiết lập Audit Policy:}
+            \begin{itemize}
+                \item \texttt{Bật Audit Account Management để ghi lại các thay đổi về tài khoản như tạo, xóa, hoặc chỉnh sửa tài khoản.}
+                \begin{itemize}
+                    \item Vào \textbf{Group Policy Management} mở rộng \textbf{Forest} > \textbf{Domains} > \textbf{labtdtu.com}  
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.1.png}
+                    \caption{Nhấn chuột phải vào \textbf{Group Policy Objects} rồi chọn \textbf{New }để tạo GPO “Kich ban 3” }
+                    \label{fig:enter-label}
+                \end{figure}
+                \item \textbf{Computer Configuration} > \textbf{Policies} > \textbf{Windows Settings} > \textbf{Security Settings} > \textbf{Advanced Audit Policy Configuration} > \textbf{Audit Policies} > \textbf{Account Management}. 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.2.png}
+                                    \caption{Chọn \textbf{Audit Application Group Management} và \textbf{Audit User Account Management} cho cả sự kiện \textbf{Success }and \textbf{Failure} }
+                                    \label{fig:enter-label}
+                                \end{figure}
+                                \item Ra Group Policy Manager và kéo GPO kich ban 3 vào labtdtu.com 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.3.png}
+                                    \caption{}
+                                    \label{fig:enter-label}
+                                \end{figure}
+\newpage
+                        \item Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh \textbf{gpupdate /force} trong \textbf{Command Prompt} (với quyền Admin): 
+\begin{figure}[H]
+                                \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.5.png}
+            \caption{gpupdate /force}
+            \label{fig:enter-label}
+            \end{figure}
+            \end{itemize}
+            \end{itemize}
+            \item \textbf{Demo: Theo dõi các mã sự kiện liên quan}
+            \begin{itemize}
+                    \begin{itemize}
+                    \item Vào Server Manager > Dashboard chọn Tools > Active Directory Users and Computers
+                    \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 3/kịch bản 3.6.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7cm]{imglap/gui_img/kịch bản 3/kịch bản 3.7.png}}\hfill
+ 				\caption{Vào tạo 1 user mới}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+\newpage
+        \item Mở \textbf{Server Manager} > \textbf{Tools} > \textbf{Event Viewer}
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.8.png}
+                    \caption{Trong Event Viewer, điều hướng đến: Windows Logs > Security. }
+                    \label{fig:enter-label}
+                \end{figure}
+                \item Tạo POPUP mỗi khi xóa user 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.9.png}
+                                    \caption{Tạo popup}
+                                    \label{fig:enter-label}
+                                \end{figure}
+\newpage
+                                \item Tại mục Create a Basic Task > Điền name và Kich ban 3
+\begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 3/kịch bản 3.11.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 3/kịch bản 3.12.png}}\hfill
+ 				\caption{hoàn thành task}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+                                \item Tại Start a Program: Điền msg vào Program và điền “ * User account da bi xoa” vào Add agruments
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.13.png}
+                                    \caption{Tạo đoạn thông báo tin}
+                                    \label{fig:enter-label}
+                                \end{figure}
+\newpage
+                                                                \item Kết quả
+                                                                \end{itemize}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 3/kịch bản 3.15.png}
+            \caption{Sau khi có một tài khoản bị xóa thông báo sẽ hiển thị}
+            \label{fig:enter-label}
+        \end{figure}
+        
+                \end{itemize}
+        \end{enumerate}
+
+        \newpage
+        \subsection{Kịch bản 4: Giám sát các thay đổi trong GPO}
+        \begin{enumerate}
+            \item \textbf{Thiết lập Audit Policy:}
+            \begin{itemize}
+                \item \texttt{Bật Audit Policy Change để giám sát các thay đổi chính sách bảo mật.}
+                \begin{itemize}
+                    \item Vào \textbf{Group Policy Management} mở rộng \textbf{Forest} > \textbf{Domains} > \textbf{labtdtu.com}  
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.1.png}
+                    \caption{Nhấn chuột phải vào \textbf{Group Policy Objects} rồi chọn \textbf{New }để tạo GPO “Kich ban 4” }
+                    \label{fig:enter-label}
+                \end{figure}
+\newpage
+                \item Chuột phải vào GPO “Kich ban 4” vừa tạo và chọn \textbf{Edit }để vào tab \textbf{Group Policy Management Editor} 
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.2.png}
+                    \caption{}
+                    \label{fig:enter-label}
+                \end{figure}
+\newpage
+                                \item Điều hướng đến \textbf{Computer Configuration > Policies > Windows Settings > Security Settings > Advanced Audit Policy Configuration > Audit Policies > Policy Change}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.3.png}
+    \caption{Chọn \textbf{Audit Audit Policy Change} và bật cho cả sự kiện \textbf{Success }and \textbf{Failure} }
+    \label{fig:enter-label}
+\end{figure}
+\item Ra Group Policy Manager và kéo GPO kich ban 4 vào labtdtu.com 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.4.png}
+    \caption{Liên kết GPO kịch bản 4 vào domain control}
+    \label{fig:enter-label}
+\end{figure}
+\item Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh \textbf{gpupdate /force} trong \textbf{Command Prompt} (với quyền Admin): 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.5.png}
+                                    \caption{gpupdate /force}
+                                    \label{fig:enter-label}
+                                \end{figure}
+                                                                \end{itemize}
+            \end{itemize}
+            \item \textbf{Demo: Kiểm tra các mã sự kiện liên quan}
+            \begin{itemize}
+                    
+                    \begin{itemize}
+                    \item Vào Server Manager > Dashboard chọn Tools > Group Policy Management \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 4/kịch bản 4.6.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 4/kịch bản 4.7.png}}\hfill
+ 				\caption{Tạo GPO demo > Click chuột phải vào GPO demo Chọn Edit và test thử}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+
+                \item Di chuyển GPO cho labtdtu.com 
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.8.png}
+                    \caption{Liên kết GPO vào domain control}
+                    \label{fig:enter-label}
+                \end{figure}
+                                \item Sau khi thực hiện các cấu hình, áp dụng Group Policy bằng cách chạy lệnh \textbf{gpupdate /force} trong \textbf{Command Prompt} (với quyền Admin): 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.9.png}
+                                    \caption{gpupdate /force}
+                                    \label{fig:enter-label}
+                                \end{figure}
+\newpage
+                                \item Mở \textbf{Server Manager} > \textbf{Tools} > \textbf{Event Viewer}
+                                \item Trong Event Viewer, điều hướng đến: Windows Logs > Security.
+\begin{figure}[H]
+                                                                    \centering
+                                                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 4/kịch bản 4.10.png}
+                                                                    \caption{Tìm mã\textbf{ 4719}: Đặt lại Audit Policy. }
+                                                                    \label{fig:enter-label}
+                                                                \end{figure}
+                                                                                                                                \end{itemize}
+                \end{itemize}
+        \end{enumerate}
+\newpage        
+        \subsection{Kịch bản 5: Cấu hình Firewall}
+        \begin{itemize}
+            \item Mở \textbf{Server Manager > Dashboard} và chọn \textbf{Tools} > \textbf{Group Policy Management}.
+        \end{itemize}
+Trong \textbf{Group Policy Management}, mở rộng \textbf{Forest} > \textbf{Domains}. Nhấn chuột phải vào Group Policy Objects rồi chọn \textbf{New} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.1.png}
+    \caption{Điền tên cho GPO mới tạo là “Kich ban 5” và nhấn \textbf{OK } }
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+Để tùy chỉnh GPO đã tạo ta nhấn chuột phải vào GPO “Kich ban 5” rồi chọn \textbf{Edit… }để mở\textbf{ Group Policy Management Editor} 
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.2.png}
+     \caption{Group Policy Management Editor}
+     \label{fig:enter-label}
+ \end{figure}
+\newpage
+  Trong cửa sổ \textbf{Group Policy Management Editor}, điều hướng đến:
+
+\textbf{Computer Configuration} > \textbf{Policies }> \textbf{Windows Settings} > \textbf{Security Settings} >\textbf{ Windows Defender Firewall with Advanced Security > Windows Defender Firewall with Advanced Security > Outbound Rules > New Rule} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.3.png}
+    \caption{\textbf{Tại Rule Type chọn Custom } }
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\textbf{Tại Program > All Programs} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.4.png}
+    \caption{Program > All Programs}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\textbf{Tại Protocol and Ports > Any} 
+\begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.5.png}
+            \caption{Protocol and Ports > Any}
+            \label{fig:enter-label}
+        \end{figure}
+\newpage
+        \textbf{Tại Scope } 
+        
+        \textbf{Which Iocal IP addresses does this rule apply to? Chọn These IP addresses và add ip của máy muốn chặn.} 
+        
+        \textbf{Which remote IP addresses does this rule apply to? Chọn These IP addresses và add ip của trang web muốn chặn.(ở đây là ip của facebook)} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.6.png}
+    \caption{Cài đặt IP}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\textbf{Tại Action > Block the connection} 
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.7.png}
+     \caption{Chặn kết nối}
+     \label{fig:enter-label}
+ \end{figure}
+\newpage
+  \textbf{Tại Profile chọn hết} 
+\begin{figure}[H]
+                    \centering
+                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.8.png}
+                    \caption{Áp dụng rule}
+                    \label{fig:enter-label}
+                \end{figure}
+\newpage
+\textbf{Tại Name điền tên rule "Block Facebook"} 
+\begin{figure}[H]
+                                    \centering
+                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.9.png}
+                                    \caption{Đặt tên}
+                                    \label{fig:enter-label}
+                                \end{figure}
+\newpage
+\textbf{Vào máy Server và Client1 mở cmd với quyền administrator vồi chạy lệnh gpupdate /force} 
+\begin{figure}[H]
+                                                                    \centering
+                                                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.10.png}
+                                                                    \caption{gpupdate /force}
+                                                                    \label{fig:enter-label}
+                                                                \end{figure}
+\textbf{Kiểm tra: Thử vào facebook thì không được} 
+\begin{figure}[H]
+                                                                                                                                    \centering
+                                                                                                                                    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 5/kịch bản 5.11.png}
+                                                                                                                                    \caption{Faccebook đã bị chặn}
+                                                                                                                                    \label{fig:enter-label}
+                                                                                                                                \end{figure}                                                                                    
+        \subsection{Kịch bản 6: Cấu hình phòng chống DDoS và giám sát IP truy cập vào Web Server}
+        \begin{enumerate}
+            \item \textbf{Cài đặt dịch vụ Web Server IIS } 
+\begin{itemize}
+\item Vào \textbf{Server Manager > Dashboard chọn Manager > Add Role and Features} 
+\begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.1.png}
+            \caption{Server Manager}
+            \label{fig:enter-label}
+        \end{figure}
+        \item Chọn Next 
+\begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.2.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.3.png}}\hfill
+ 				\caption{Cài đặt Web Server IIS}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+\newpage
+        \item Chọn Web Server (IIS) > Next 
+Chọn Web Server (IIS) > Next\begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.4.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.5.png}}\hfill
+ 				\caption{Tiếp tục cài đặt Web Server IIS}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+        \item Tại \textbf{Server Roles} Điều hướng \textbf{Web Server (IIS)} > \textbf{Web Server} > \textbf{Security }
+        \item Tích chọn \textbf{IP and Domain Restrictions} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.6.png}
+    \caption{IP and Domain Restrictions}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\item  Chọn \textbf{Install} 
+\begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.7.png}
+            \caption{Cài đặt}
+            \label{fig:enter-label}
+        \end{figure}
+\newpage
+\end{itemize}
+        \item \textbf{Cấu hình Web Server IIS}
+\begin{itemize}
+    \item Vào \textbf{Server Manager} > \textbf{IIS }rồi nhấn chuột phải vào \textbf{Server-DC-01} chọn \textbf{Internet Information Services (IIS) Manager}  
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.8.png}
+    \caption{Internet Information Services (IIS) Man-
+ager}
+    \label{fig:enter-label}
+\end{figure}
+\item Chọn \textbf{SERVER-DC-01} > \textbf{IP Address and Domain Restriction} > \textbf{Edit Dynamic Restriction Setting} 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.9.png}
+    \caption{Vào Edit Dynamic Restriction Setting}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\item \textbf{Deny IP Address Based on the Number of Concurrent Requests}: Tùy chọn này cho phép chặn các IP gửi quá nhiều yêu cầu cùng một lúc.
+\item  \textbf{Deny IP Address Based on the Number of Requests Over a Period of Time}: Chặn các IP gửi quá nhiều yêu cầu trong một khoảng thời gian ngắn. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.10.png}
+    \caption{Cấu hình Dynamic Restriction}
+    \label{fig:enter-label}
+\end{figure}
+\item Để kiểm tra xem cấu hình thành công chưa thì vào trình duyệt tìm kiếm địa chỉ IP của Web vừa tạo. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.11.png}
+    \caption{Kiểm tra P của Web vừa tạo}
+    \label{fig:enter-label}
+\end{figure}
+\item Để kiểm tra xem cấu hình chống DDoS thì vào Powershell chạy lệnh
+
+while (\$true) \{
+
+try \{
+
+Invoke-WebRequest -Uri "http://192.168.1.3" -TimeoutSec 3 -ErrorAction Stop
+
+Write-Host "Request sent"
+
+\}
+
+catch \{Write-Host "Request failed"\}
+
+\}
+\item Ta sẽ thấy Request sent được 20 lần rồi Request failed là đã cấu hình thành công. \begin{figure}[H]
+ 		\subfloat[\label{fig:AD_p2.1}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.12.png}}\hfill
+ 		\subfloat[\label{fig:AD_p2.2}]
+ 			{\includegraphics[width=7.5cm]{imglap/gui_img/kịch bản 6/kịch bản 6.13.png}}\hfill
+ 				\caption{Request Failed}
+ 				\label{fig:AD_p2}
+ 		\end{figure}
+\newpage
+\end{itemize}
+        \item Quan sát những IP truy cập vào Web 
+\begin{itemize}
+    \item Vào \textbf{Internet Information Services (IIS) Manager} chọn \textbf{SERVER-DC-01} > \textbf{Logging}
+\begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.14.png}
+            \caption{Nhấn \textbf{Browse }để chọn nơi lưu trữ file thông tin. Rồi chọn \textbf{Apply} }
+            \label{fig:enter-label}
+        \end{figure}
+                \item Mở File vừa lưu 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{imglap/gui_img/kịch bản 6/kịch bản 6.15.png}
+    \caption{Lịch sử các IP đã truy cập vào web}
+    \label{fig:enter-label}
+\end{figure}
+\end{itemize}
+
+
+ 
+\end{itemize}
+
+        \end{enumerate}
+       \newpage
+\section*{\centering \fontsize{16}{20}\selectfont TÀI LIỆU THAM KHẢO}
+\begin{enumerate}
+    \item "Fix Can't Create Tasks to Display Messages in Windows 8 Task Scheduler"
+
+    \url{https://www.askvg.com/fix-cant-create-tasks-to-display-messages-in-windows-8-task-scheduler/}.
+    \item "How to Fix Windows Task Scheduler Display Message Option Not Available"
+
+    \url{https://www.youtube.com/watch?v=EZhnAihz3lo&t=552s}.
+    \item "Windows Task Scheduler Tutorial" 
+
+    \url{https://www.youtube.com/watch?v=pqJCnvQ3Awo&t=128s}.
+    \item "Task Scheduler in Windows - Automate Your Tasks"
+    
+    \url{https://www.youtube.com/watch?v=0HuObJLfb7U}.
+\end{enumerate}
+                
+\end{document}
